@@ -8,19 +8,21 @@ all:
       access_ip: "192.168.1.125"
       ansible_host: "192.168.1.125"
       ip: "192.168.1.125"
-      # etcd_member_name: etcd1
       ansible_user: root
     aries:
       access_ip: "192.168.1.133"
       ansible_host: "192.168.1.133"
       ip: "192.168.1.133"
-      # etcd_member_name: etcd2
+      ansible_user: root
+    athena:
+      access_ip: "192.168.1.121"
+      ansible_host: "192.168.1.121"
+      ip: "192.168.1.121"
       ansible_user: root
     vm1:
       access_ip: "192.168.1.129"
       ansible_host: "192.168.1.129"
       ip: "192.168.1.129"
-      # etcd_member_name: etcd3
       ansible_user: root
   children:
     kube-master:
@@ -29,9 +31,11 @@ all:
     kube-node:
       hosts:
         aries:
+        athena:
         vm1:
     etcd:
       hosts:
+        # keep only master for simplicity next time
         master:
         vm1:
         aries:
