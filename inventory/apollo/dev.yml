@@ -5,25 +5,20 @@ all:
   hosts:
     # note IP is needed, fqdn cause errors
     master:
-      access_ip: "192.168.1.125"
-      ansible_host: "192.168.1.125"
-      ip: "192.168.1.125"
+      access_ip: "192.168.1.105"
+      ansible_host: "192.168.1.105"
+      ip: "192.168.1.105"
       ansible_user: root
     aries:
-      access_ip: "192.168.1.133"
-      ansible_host: "192.168.1.133"
-      ip: "192.168.1.133"
+      access_ip: "192.168.1.119"
+      ansible_host: "192.168.1.119"
+      ip: "192.168.1.119"
       ansible_user: root
-    athena:
-      access_ip: "192.168.1.121"
-      ansible_host: "192.168.1.121"
-      ip: "192.168.1.121"
-      ansible_user: root
-    vm1:
-      access_ip: "192.168.1.129"
-      ansible_host: "192.168.1.129"
-      ip: "192.168.1.129"
-      ansible_user: root
+    # athena:
+    #   access_ip: "192.168.1.121"
+    #   ansible_host: "192.168.1.121"
+    #   ip: "192.168.1.121"
+    #   ansible_user: root
   children:
     kube-master:
       hosts:
@@ -31,14 +26,10 @@ all:
     kube-node:
       hosts:
         aries:
-        athena:
-        vm1:
+        # athena:
     etcd:
       hosts:
-        # keep only master for simplicity next time
         master:
-        vm1:
-        aries:
     k8s-cluster:
       children:
         kube-master:
