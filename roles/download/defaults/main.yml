@@ -21,7 +21,7 @@ kubeadm_images: {}
 # if this is set to true will only download files once. Doesn't work
 # on Container Linux by CoreOS unless the download_localhost is true and localhost
 # is running another OS type. Default compress level is 1 (fastest).
-download_run_once: False
+download_run_once: true
 download_compress: 1
 
 # if this is set to true will download container
@@ -32,7 +32,7 @@ download_container: True
 # local caching of docker images or for Container Linux by CoreOS cluster nodes.
 # Otherwise, uses the first node in the kube-master group to store images
 # in the download_run_once mode.
-download_localhost: False
+download_localhost: true
 
 # Always pull images if set to True. Otherwise check by the repo's tag/digest.
 download_always_pull: False
@@ -164,6 +164,7 @@ kubelet_checksums:
     v1.15.1: 3032531dc8ff4ea1debafcfb7b84f6c39a83e67a452a50b64d1023ba57299100
     v1.15.0: a16443434eb0391991bff9a10288d83beb38be4d406954858d9fdc1063870284
   amd64:
+    v1.17.10: 49745338bcc5e1bb00bd282fa4b983b95f10940dc47605d52ac2355978c554eb
     v1.17.0: c2af77f501c3164e80171903028d35c632366f53dec0c8419828d4e55d86146f
     v1.16.8: 4573da19fed14c84f4434ab7cbedf5ded4bf89710c078d58c0703cf2332df198
     v1.16.7: f49755b06848914c2729353d3580199a70ec8d732609660e90214b4f48ff4398
@@ -232,6 +233,7 @@ kubectl_checksums:
     v1.15.1: 1f5ad15f0522c5038ea014f4b6987a7a67d68585c1fb158349619b552c027a8c
     v1.15.0: db05f4c1799e019d5ebc51737f31132c191ffce13c516fa758e7137173abd855
   amd64:
+    v1.17.10: 1be86a5c6fe210f34b8366170aa4c0f29b5b999c012edfaaab2331618ae68ce8
     v1.17.0: 6e0aaaffe5507a44ec6b1b8a0fb585285813b78cc045f8804e70a6aac9d1cb4c
     v1.16.8: 1d8602496ca4b843824a9746206509991eb8d30b5bb8436b36a02718729934ed
     v1.16.7: c31ca51b526489cd929be71fc1dc9c3cc24b6df5641b3505b467bac51862047d
@@ -300,6 +302,7 @@ kubeadm_checksums:
     v1.15.1: 44fbfad0f1026d249fc4f365f1e9562cd52d75360d4d1032731122ba5a4d57dc
     v1.15.0: fe3c79070814fe847a23209b1027672fe5c5e7e5c9611e329225058926836f96
   amd64:
+    v1.17.10: c1b103a67ae1b5c4a1e44deac761677d0c5fce69ab2b6a3346bd40c66bfe5b0b
     v1.17.0: 0d8443f50fb7caab2e5e7e53f9dc56d5ffe55f021ec061f2e2bcba0481df5a48
     v1.16.8: 58a74986af13b969abc8b471822f36f3fda71f95ed1c006f48c8d2ab88f8edf1
     v1.16.7: 018f7c2fae7a1ce7bc892edbea3ee2c493e4b023436be9f8f65fd392dc3e17b6
