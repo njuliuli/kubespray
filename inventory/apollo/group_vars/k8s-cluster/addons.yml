@@ -2,6 +2,12 @@
 # Kubernetes dashboard
 # RBAC required. see docs/getting-started.md for access details.
 dashboard_enabled: true
+# default v1.10.1 not running correctly with kubernetes v1.17
+dashboard_image_repo: "kubernetesui/dashboard"
+dashboard_image_tag: "v2.0.0"
+# Note: "Metrics Scraper" may need to be changed accordingly if enabled
+# https://github.com/kubernetes/dashboard/releases/tag/v2.0.0
+
 
 # Helm deployment
 helm_enabled: true
