@@ -20,7 +20,20 @@ kube_users_dir: "{{ kube_config_dir }}/users"
 kube_api_anonymous_auth: true
 
 ## Change this to use another Kubernetes version, e.g. a current beta release
-kube_version: v1.17.10
+kube_version: v1.17.10 #kube_version
+
+kubelet_checksums:
+  amd64:
+    v1.17.10: b48deb77f905bb936be1089616ce5720cb7b79be94bdf3a9938a988940d0bae6 #kubelet_checksums
+
+kubectl_checksums:
+  amd64:
+    v1.17.10: b48deb77f905bb936be1089616ce5720cb7b79be94bdf3a9938a988940d0bae6 #kubectl_checksums
+
+kubeadm_checksums:
+  amd64:
+    v1.17.10: b48deb77f905bb936be1089616ce5720cb7b79be94bdf3a9938a988940d0bae6 #kubeadm_checksums
+
 
 # kubernetes image repo define
 kube_image_repo: "gcr.io/google-containers"
