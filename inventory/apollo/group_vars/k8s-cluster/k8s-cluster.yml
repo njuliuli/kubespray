@@ -257,16 +257,13 @@ kubectl_localhost: true
 # kubelet_enforce_node_allocatable: pods
 
 # Optionally reserve resources for OS system daemons.
-system_reserved: true
+# system_reserved: true
 ## Uncomment to override default values
 # system_memory_reserved: 512M
-system_cpu_reserved: 2000m
+# system_cpu_reserved: 500m
 ## Reservation for master hosts
 # system_master_memory_reserved: 256M
 # system_master_cpu_reserved: 250m
-
-# replace the default 100m
-kube_cpu_reserved: 2000m
 
 # An alternative flexvolume plugin directory
 # kubelet_flexvolumes_plugins_dir: /usr/libexec/kubernetes/kubelet-plugins/volume/exec

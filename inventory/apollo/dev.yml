@@ -17,6 +17,15 @@ all:
       # CPU isolation from Linux scheduler
       isolcpus_enabled: true
       isolcpus: "1,3-11,13,15-23"
+      # CPU and memory reservation for worker nodes,
+      # details at https://kubernetes.io/docs/tasks/administer-cluster/reserve-compute-resources/
+      cpu_reserved: "0,2,12,14"
+      system_reserved: true
+      # now these two CPU setting is needed to let policymanager manage pool correctly
+      system_cpu_reserved: 2000m
+      system_memory_reserved: 512M
+      kube_cpu_reserved: 2000m
+      kube_memory_reserved: 512M
     # athena:
     #   access_ip: "192.168.1.121"
     #   ansible_host: "192.168.1.121"

@@ -69,6 +69,9 @@ systemReserved:
   memory: {{ system_memory_reserved|default('512M')|regex_replace('Mi', 'M') }}
 {% endif %}
 {% endif %}
+{% if cpu_reserved is defined %}
+ReservedSystemCPUs: {{ cpu_reserved }}
+{% endif %}
 resolvConf: "{{ kube_resolv_conf }}"
 {% if kubelet_config_extra_args %}
 {{ kubelet_config_extra_args | to_nice_yaml(indent=2) }}
