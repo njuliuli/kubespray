@@ -25,19 +25,22 @@ download_run_once: true
 download_localhost: true
 
 ## Change this to use another Kubernetes version, e.g. a current beta release
-kube_version: v1.17.10 #kube_version
+kube_version: v1.17.3 #kube_version
 
 kubelet_checksums:
   amd64:
-    v1.17.10: 3523c8e05f6ee8912e48677ddc9cd8d60d862deb48220ba86b4880fd1586c262 #kubelet_checksums
+    v1.17.3: a5c2349c61771f8bf9f80feb174f7e9d9a6c9e79559758ea538ed3dead07bdcb
+    v1.17.10: 6c4dd2e17d933bb989b6f48abbb38b6018d43ae490e4049af3a9a76bda3f8810 #kubelet_checksums
 
 kubectl_checksums:
   amd64:
-    v1.17.10: c11e562b9e082fb838750f48a39b13cc504fdf24fbd5b022939ce308fac1f0cf #kubectl_checksums
+    v1.17.3: ae8627adb1f0ae7bdb82ffd74a579953b8acdcd4b94aeefc7569078c3d7994c6
+    v1.17.10: c84212e8e2ef488e759dacef4a014d91f3a449837e086ca93ae985ba372da7c6 #kubectl_checksums
 
 kubeadm_checksums:
   amd64:
-    v1.17.10: 9d3244f10008329378676fe2019bd8f9cfa81401c58cf266e29432d3a4abac96 #kubeadm_checksums
+    v1.17.3: e34e3193a1161aea7269cee3f115e86ff71f01702a1c15fa0f71103bf2dba304
+    v1.17.10: 130583c72717cb195263385ee1377bc40acfc1cf05a09f94285965761f35292c #kubeadm_checksums
 
 
 # kubernetes image repo define
