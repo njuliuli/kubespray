@@ -10,7 +10,19 @@ KUBE_DOWNLOAD_CONFIG = "/home/li/kubespray/inventory/apollo/group_vars/k8s-clust
 OWNER = "li:li"
 
 
-def replaceLine(version, filename, checksum):
+def updateVersion(version):
+    with open(KUBE_DOWNLOAD_CONFIG, 'r') as f:
+        content = f.read()
+        sFrom = r"kube_version: \S+ #kube_version\n"
+        sTo = r"kube_version: {} #kube_version\n".format(version)
+        content = re.sub(sFrom, sTo, content)
+
+    with open(KUBE_DOWNLOAD_CONFIG, 'w') as f:
+        f.write(content)
+
+    return
+
+def updateChecksum(version, filename, checksum):
     with open(KUBE_DOWNLOAD_CONFIG, 'r') as f:
         content = f.read()
         sFrom = r"{}: \S+ #{}_checksums\n".format(version, filename)
@@ -32,25 +44,32 @@ if __name__ == '__main__':
     # cache directory will be removed after host reboot
     subprocess.run(["mkdir", "-p", "{}/images".format(DOWNLOAD_CACHE_DIR)])
 
-    for binary in ["kubelet", "kubectl", "kubeadm"]:
-        # move file
-        fFrom = "{}/_output/release-stage/server/linux-amd64/kubernetes/server/bin/{}".format(
-            KUBE_ROOT, binary)
-        fTo = "{}/{}-{}-amd64".format(DOWNLOAD_CACHE_DIR, binary, version)
-        subprocess.run(["rsync", "-a", fFrom, fTo])
-        # get sha256 checksum
-        result = subprocess.run(
-            ["sha256sum", fTo], check=True, stdout=subprocess.PIPE)
-        checksum = result.stdout.split()[0].decode("utf-8")
-        replaceLine(version, binary, checksum)
+    if version == "v1.17.10":
+        updateVersion(version)
+        for binary in ["kubelet", "kubectl", "kubeadm"]:
+            # move file
+            fFrom = "{}/_output/release-stage/server/linux-amd64/kubernetes/server/bin/{}".format(
+                KUBE_ROOT, binary)
+            fTo = "{}/{}-{}-amd64".format(DOWNLOAD_CACHE_DIR, binary, version)
+            subprocess.run(["rsync", "-a", fFrom, fTo])
+            # get sha256 checksum
+            result = subprocess.run(
+                ["sha256sum", fTo], check=True, stdout=subprocess.PIPE)
+            checksum = result.stdout.split()[0].decode("utf-8")
+            updateChecksum(version, binary, checksum)
 
-    for image in ["kube-apiserver", "kube-controller-manager",
-                  "kube-proxy", "kube-scheduler"]:
-        fFrom = "{}/_output/release-stage/server/linux-amd64/kubernetes/server/bin/{}.tar".format(
-            KUBE_ROOT, image)
-        fTo = "{}/images/gcr.io_google-containers_{}_{}.tar".format(
-            DOWNLOAD_CACHE_DIR, image, version)
-        subprocess.run(["rsync", "-a", fFrom, fTo])
+        for image in ["kube-apiserver", "kube-controller-manager",
+                    "kube-proxy", "kube-scheduler"]:
+            fFrom = "{}/_output/release-stage/server/linux-amd64/kubernetes/server/bin/{}.tar".format(
+                KUBE_ROOT, image)
+            fTo = "{}/images/gcr.io_google-containers_{}_{}.tar".format(
+                DOWNLOAD_CACHE_DIR, image, version)
+            subprocess.run(["rsync", "-a", fFrom, fTo])
+    elif version == "v1.17.3":
+        updateVersion(version)
+    else:
+        raise Exception("version ({}) unknown".format(version))
+
 
     subprocess.run(["sudo", "chown", OWNER, "-R", DOWNLOAD_CACHE_DIR])
     subprocess.run(["chmod", "755", "-R", DOWNLOAD_CACHE_DIR])
