@@ -25,7 +25,7 @@ download_run_once: true
 download_localhost: true
 
 ## Change this to use another Kubernetes version, e.g. a current beta release
-kube_version: v1.17.3 #kube_version
+kube_version: v1.17.10 #kube_version
 
 kubelet_checksums:
   amd64:
